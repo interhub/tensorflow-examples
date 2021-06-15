@@ -34,7 +34,7 @@
             ...getRandMachPoints(10, 0.2, 0.8, 0.1, 0.5, 0),//red
             ...getRandMachPoints(10, 1.2, 1.8, 0.1, 0.6, 1),//pink
             ...getRandMachPoints(10, 1, 1.9, 1.1, 1.9, 2),  //purple
-            ...getRandMachPoints(10, 0.2, 0.8, 1.1, 1.6, 3),//blue
+            ...getRandMachPoints(10, 0.1, 0.8, 1.2, 2, 3),//blue
             ...getRandMachPoints(10, 0.2, 1.8, 0.8, 1, 4),  //green
 
         ]
@@ -76,6 +76,12 @@
             const result = await model.predict(predictInput)
             // const resultData = result.dataSync()
             const resultMax = result.argMax(-1).dataSync()[0]
+
+            const color = COLORS[resultMax]
+            const div = document.body.querySelector('div')
+
+            div.innerText += `${color} result color ✅ `
+            div.style.color = color
 
             console.log(COLORS[resultMax], 'result color ✅ ')
 
@@ -122,10 +128,9 @@
             point(mouseX, mouseY)
             await predictDraw()
         }
-
-
     </script>
 </head>
 <body>
+<div></div>
 </body>
 </html>
