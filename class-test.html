@@ -34,10 +34,10 @@
             // ...getRandMachPoints(10, 0.1, 0.8, 0.1, 0.6, 0),//red
             // ...getRandMachPoints(20, 1.2, 1.9, 0.1, 0.6, 1),//pink
             // ...getRandMachPoints(30, 1, 1.9, 1.1, 1.9, 2),  //purple
-            ...getRandMachPoints(30, 0.1, 0.3, 0.1, 1.9, 3),//blue
-            ...getRandMachPoints(30, 0.3, 1, 0.1, 1.9, 4),  //green
-            ...getRandMachPoints(30, 1, 1.5, 0.1, 1.9, 3),//blue
-            ...getRandMachPoints(30, 1.5, 2, 0.1, 1.9, 4),  //green
+            ...getRandMachPoints(40, 0.1, 0.3, 0.1, 1.9, 3),//blue
+            ...getRandMachPoints(40, 0.3, 1, 0.1, 1.9, 4),  //green
+            ...getRandMachPoints(40, 1, 1.5, 0.1, 1.9, 3),//blue
+            ...getRandMachPoints(40, 1.5, 2, 0.1, 1.9, 4),  //green
             // ...getRandMachPoints(20, 0.8, 1.1, 0.1, 1, 4),  //green
         ]
 
@@ -64,7 +64,7 @@
 
         async function fit() {
             await model.fit(trainX, trainY, {
-                epochs: 1000,
+                epochs: 4000,
                 // yieldEvery: 'never',
             })
         }
@@ -115,8 +115,11 @@
         }
 
         async function mousePressed() {
-            strokeWeight(9)
             const color = await await predictDraw()
+            strokeWeight(9)
+            stroke(255)
+            point(mouseX, mouseY)
+            strokeWeight(5)
             stroke(color)
             point(mouseX, mouseY)
         }
