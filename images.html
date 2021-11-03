@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>classify with tensorflow</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.min.js"></script>
+
+    <script>
+        const imageTensor = tf.tensor([
+            [0, 2.2, 0, 1],
+            [1, 0, 1, 0],
+            [0, 1, 0, 1]
+        ], [3, 4])
+        const zeros = tf.zeros([1024, 768, 1], 'bool')
+        console.log(imageTensor.dataSync(), 'data1')
+        console.log(zeros.print(), 'data2')
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>

@@ -25,8 +25,6 @@
 
         const learningRate = 0.3
 
-        // const optimizer = tf.train.sgd(learningRate)
-
         function setup() {
             createCanvas(400, 400)
             m = tf.variable(tf.scalar(random(1)))
@@ -37,32 +35,27 @@
             strokeWeight(8)
         }
 
-        //pred: Tensor x_vals
-        //labels: Tensor tf.tensor1d(y_vals)
-        //return tensor type and calculate mean value for 1 element tensor
-        /*function loss(pred, labels) {
-            return pred
-                .sub(labels)
-                .square()
-                .mean()
-        }*/
+        /**
+         * main model set up config
+         */
+        const getSetUpModel = () => {
+            const model = tf.sequential()
+            const inputShape = [1]
+            const units = 1
 
-        /*function predict(x) {
-            const xs = tf.tensor1d(x)
-            // y = mx + b;
-            const ys = xs.mul(m).add(b)
-            return ys
-        }*/
-        const model = tf.sequential()
-        const inputShape = [1]
-        const units = 1
-        model.add(tf.layers.dense({units, inputShape}))
-        model.add(tf.layers.dense({units}))
+            model.add(tf.layers.dense({units, inputShape}))
+            model.add(tf.layers.dense({units}))
+            model.compile({loss: 'meanSquaredError', optimizer: tf.train.sgd(learningRate)})
+            return model
+        }
 
-        model.compile({loss: 'meanSquaredError', optimizer: tf.train.sgd(learningRate)})
+        const model = getSetUpModel()
 
-
+        /**
+         * main fit method
+         */
         async function fit() {
+            console.log('fit with', {x_vals, y_vals})
             const xs = tf.tensor(x_vals)
             const ys = tf.tensor(y_vals)
             await model.fit(xs, ys, {
@@ -71,11 +64,15 @@
             })
         }
 
+        /**
+         * predict new values and draw
+         */
         async function predictDraw() {
             strokeWeight(2)
             const lineX = [0, 0.2, 0.4, 0.6, 0.8, 1]
             const predictX = tf.tensor2d(lineX, [lineX.length, 1])
             const lineY = await model.predict(predictX).dataSync()
+            console.log({lineY, lineX})
 
             const pointsX = lineX.map((point) => map(point, 0, 1, 0, width))
             const pointsY = lineY.map((point) => map(point, 0, 1, height, 0))
@@ -103,6 +100,7 @@
 
             let x = map(mouseX, 0, width, 0, 1)
             let y = map(mouseY, 0, height, 1, 0)
+            console.log({x, y}, 'press')
             x_vals.push(x)
             y_vals.push(y)
             // if (x_vals.length < 10) return
