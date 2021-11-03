@@ -18,8 +18,8 @@
         // Linear Regression with TensorFlow.js
         // Video: https://www.youtube.com/watch?v=dLp10CFIvxI
 
-        let x_vals = [0.1, 0.2, 0.3, 0.4, 0.6]
-        let y_vals = [0.2, 0.4, 0.6, 0.8, 1.2]
+        let x_vals = [1, 2, 3, 4, 6]
+        let y_vals = [2, 4, 6, 8, 12]
 
         const learningRate = 0.3
 
@@ -33,7 +33,7 @@
 
             model.add(tf.layers.dense({units, inputShape}))
             model.add(tf.layers.dense({units}))
-            model.compile({loss: 'meanSquaredError', optimizer: tf.train.sgd(learningRate)})
+            model.compile({loss: 'meanSquaredError', optimizer: tf.train.adam(learningRate)})
             return model
         }
 
@@ -54,7 +54,7 @@
         const start = async () => {
             console.log('start run')
             await fit()
-            const input = [4000]
+            const input = [325]
             const predictX = tf.tensor(input, [1, 1])
             console.log('end fit run')
             predictX.print()
