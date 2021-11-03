@@ -18,8 +18,8 @@
         // Linear Regression with TensorFlow.js
         // Video: https://www.youtube.com/watch?v=dLp10CFIvxI
 
-        let x_vals = [1, 2, 3, 4, 6]
-        let y_vals = [2, 4, 6, 8, 12]
+        let x_vals = [[1, 2], [2, 3], [4, 5], [6, 7], [8, 9]]
+        let y_vals = [3, 5, 9, 13, 17]
 
         const learningRate = 0.3
 
@@ -28,7 +28,7 @@
          */
         const getSetUpModel = () => {
             const model = tf.sequential()
-            const inputShape = [1]
+            const inputShape = [2]
             const units = 1
 
             model.add(tf.layers.dense({units, inputShape}))
@@ -43,7 +43,7 @@
          * main fit method
          */
         async function fit() {
-            const xs = tf.tensor(x_vals, [5, 1])
+            const xs = tf.tensor(x_vals, [5, 2])
             const ys = tf.tensor(y_vals, [5, 1])
             await model.fit(xs, ys, {
                 epochs: 250,
@@ -54,8 +54,8 @@
         const start = async () => {
             console.log('start run')
             await fit()
-            const input = [325]
-            const predictX = tf.tensor(input, [1, 1])
+            const input = [[20, 15]]
+            const predictX = tf.tensor(input, [1, 2])
             console.log('end fit run')
             predictX.print()
             const res = await model.predict(predictX).dataSync()
