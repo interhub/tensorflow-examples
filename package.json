@@ -1,0 +1,16 @@
+{
+  "name": "learning",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/interhub/tensorflow-examples.git",
+  "author": "stepanturchenko <stepanstepan4@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs": "^3.11.0",
+    "@types/node": "^16.11.6",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "start:build": "parcel index.ts"
+  }
+}
