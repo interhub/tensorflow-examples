@@ -48,19 +48,23 @@ const canvas = document.querySelector('canvas')
 const CANVAS_WIDTH = canvas?.width || 0
 const CANVAS_HEIGHT = canvas?.height || 0
 
-const imageTensor = tf.randomUniform([CANVAS_HEIGHT, CANVAS_WIDTH, 3], 0, 255, 'int32')
-//@ts-ignore
-tf.browser.toPixels(imageTensor, canvas).then((res) => {
-    imageTensor.print()
-    imageTensor.dispose()
-})
+// const imageTensor = tf.randomUniform([CANVAS_HEIGHT, CANVAS_WIDTH, 3], 0, 255, 'int32')
+// //@ts-ignore
+// tf.browser.toPixels(imageTensor, canvas).then((res) => {
+//     imageTensor.print()
+//     // imageTensor.dispose()
+// })
 
 const imageDom = document.querySelector('img')
 
 if (imageDom) {
-    const imageLoadTensor = tf.browser.fromPixels(imageDom)
+    const imageLoadTensor = tf.browser.fromPixels(imageDom, 1)
     imageLoadTensor.print()
-    imageLoadTensor.dispose()
+    //@ts-ignore
+    tf.browser.toPixels(imageLoadTensor, canvas).then((res) => {
+        // imageTensor.dispose()
+    })
+    // imageLoadTensor.dispose()
 }
 
 // const start = async () => {
