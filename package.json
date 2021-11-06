@@ -7,10 +7,12 @@
   "license": "MIT",
   "dependencies": {
     "@tensorflow/tfjs": "^3.11.0",
+    "@tensorflow/tfjs-node": "^3.11.0",
     "@types/node": "^16.11.6",
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "start:build": "parcel index.ts"
+    "start:build": "parcel index.ts",
+    "node": "ts-node tf-node.ts"
   }
 }
