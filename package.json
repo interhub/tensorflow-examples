@@ -9,6 +9,7 @@
     "@tensorflow/tfjs": "^3.11.0",
     "@tensorflow/tfjs-node": "^3.11.0",
     "@types/node": "^16.11.6",
+    "file-manipulator": "^1.2.11",
     "typescript": "^4.4.4"
   },
   "scripts": {
